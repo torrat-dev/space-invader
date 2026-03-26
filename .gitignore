@@ -23,3 +23,37 @@ go.work.sum
 
 # env file
 .env
+
+# IDE files
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+tmp/
+temp/
+
+# Build outputs
+bin/
+dist/
+
+# Coverage reports
+coverage.out
+
+# Environment files
+.env.local
+.env.*.local
