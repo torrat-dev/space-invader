@@ -31,10 +31,24 @@
 </head>
 <body>
     <div class="wrapper">
-        <h2>SCORE: <span id="score">0</span></h2>
+        <h2>SCORE: <span id="score" hx-get="/score" hx-trigger="every 100ms">0</span></h2>
         
-        <div id="game-container" hx-get="/game" hx-trigger="every 200ms">
-            </div>
+        <div id="game-container" hx-get="/game" hx-trigger="every 100ms"></div>
+
+        <script>
+            window.addEventListener('keydown', function(e) {
+                if(e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    htmx.ajax('POST', '/move-left', {target: '#game-container', swap: 'none'});
+                } else if(e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    htmx.ajax('POST', '/move-right', {target: '#game-container', swap: 'none'});
+                } else if(e.key === ' ' || e.key === 'Spacebar') {
+                    e.preventDefault();
+                    htmx.ajax('POST', '/shoot', {target: '#game-container', swap: 'none'});
+                }
+            });
+        </script>
     </div>
 </body>
 </html>
