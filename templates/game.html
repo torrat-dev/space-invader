@@ -11,8 +11,10 @@
     }
     .bullet {
         position: absolute;
-        font-size: 10px;
-        color: #ff0;
+        width: 4px;
+        height: 12px;
+        background: #ff0;
+        border-radius: 2px;
     }
 </style>
 
@@ -26,7 +28,12 @@
 
 <!-- Bullets -->
 {{range .Bullets}}
-<div class="bullet" style="left: {{.X}}px; top: {{.Y}}px;">|</div>
+<div class="bullet" style="left: {{.X}}px; top: {{.Y}}px;"></div>
+{{end}}
+
+<!-- Enemy Bullets -->
+{{range .EnemyBullets}}
+<div class="bullet" style="left: {{.X}}px; top: {{.Y}}px; background: #f00;"></div>
 {{end}}
 
 {{if .GameOver}}

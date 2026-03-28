@@ -31,11 +31,18 @@
 </head>
 <body>
     <div class="wrapper">
-        <h2>SCORE: <span id="score" hx-get="/score" hx-trigger="every 100ms">0</span></h2>
+        <h2>SCORE: <span id="score" hx-get="/score" hx-trigger="every 60ms">0</span></h2>
         
-        <div id="game-container" hx-get="/game" hx-trigger="every 100ms"></div>
+        <div id="game-container"></div>
 
         <script>
+            const gameContainer = document.getElementById('game-container');
+            const ws = new WebSocket('ws://localhost:8080/ws');
+
+            ws.onmessage = function(event) {
+                gameContainer.innerHTML = event.data;
+            };
+
             window.addEventListener('keydown', function(e) {
                 if(e.key === 'ArrowLeft') {
                     e.preventDefault();
