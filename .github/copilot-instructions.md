@@ -1,24 +1,24 @@
 # Project Guidelines
 
 ## Code Style
-- Use Go standard library for HTTP server and HTML templating.
-- HTML with inline CSS for minimal dependencies.
-- Leverage HTMX for client-side interactivity without heavy JavaScript frameworks.
+- Follow standard Go formatting (`go fmt`)
+- Use meaningful variable names, e.g., `state` for game state, `mu` for mutex
+- Reference [main.go](../main.go) for struct definitions and function organization
 
 ## Architecture
-- Server-driven architecture where the Go backend maintains the single source of truth for game state.
-- GameState struct encapsulates player, enemies, bullets, score, and game over status.
-- Frontend uses HTMX polling (GET /game every 200ms) to update the game board.
-- User inputs handled via POST endpoints for movement and shooting.
+- Monolithic web application with game loop running in background goroutine
+- Centralized `GameState` struct protected by mutex for thread-safe access
+- Server-side rendering: HTML templates sent via WebSocket for real-time UI updates
+- Components: HTTP handlers for actions, WebSocket for broadcasting, game logic in update loop
 
 ## Build and Test
-- Install dependencies: `go mod tidy`
-- Run development server: `go run main.go`
-- Build executable: `go build`
-- No automated tests implemented yet; manual testing via browser at http://localhost:8080
+- Run: `go run main.go` (starts server on localhost:8080)
+- Test: `go test`
+- Build: `go build -o space-incremental.exe`
 
 ## Conventions
-- Entity struct represents positions with X and Y integers.
-- Global state protected by sync.Mutex for thread safety in HTTP handlers.
-- HTML templates stored in `templates/` directory, parsed with `template.ParseGlob`.
-- Custom agent "Web Game Developer (HTMX + Go)" available for game-specific development tasks.
+- State mutations always lock `mu` before access
+- Templates in `templates/` directory, loaded on init
+- Collision detection uses bounding box with 10-20px tolerances
+- Enemy firing from last enemy in slice (not random)
+- Game tick at 60 FPS (16ms intervals)

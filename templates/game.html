@@ -1,0 +1,42 @@
+<style>
+    #player {
+        position: absolute;
+        font-size: 30px;
+        color: #0f0;
+    }
+    .enemy {
+        position: absolute;
+        font-size: 20px;
+        color: #f00;
+    }
+    .bullet {
+        position: absolute;
+        width: 4px;
+        height: 12px;
+        background: #ff0;
+        border-radius: 2px;
+    }
+</style>
+
+<!-- Player Spaceship -->
+<div id="player" style="left: {{.Player.X}}px; top: {{.Player.Y}}px;">🚀</div>
+
+<!-- Enemies -->
+{{range .Enemies}}
+<div class="enemy" style="left: {{.X}}px; top: {{.Y}}px;">👾</div>
+{{end}}
+
+<!-- Bullets -->
+{{range .Bullets}}
+<div class="bullet" style="left: {{.X}}px; top: {{.Y}}px;"></div>
+{{end}}
+
+<!-- Enemy Bullets -->
+{{range .EnemyBullets}}
+<div class="bullet" style="left: {{.X}}px; top: {{.Y}}px; background: #f00;"></div>
+{{end}}
+
+{{if .GameOver}}
+<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 40px; color: red;">GAME OVER</div>
+<button style="position: absolute; top: 60%; left: 50%; transform: translate(-50%, -50%);" hx-post="/restart">Restart</button>
+{{end}}
