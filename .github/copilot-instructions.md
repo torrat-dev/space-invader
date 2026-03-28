@@ -3,7 +3,7 @@
 ## Code Style
 - Follow standard Go formatting (`go fmt`)
 - Use meaningful variable names, e.g., `state` for game state, `mu` for mutex
-- Reference [main.go](main.go) for struct definitions and function organization
+- Reference [main.go](../main.go) for struct definitions and function organization
 
 ## Architecture
 - Monolithic web application with game loop running in background goroutine
